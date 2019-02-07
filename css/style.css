@@ -1,0 +1,173 @@
+/* .container {
+    max-width: 960px;
+} */
+
+/*
+   * Custom translucent site header
+   */
+
+.site-header {
+    background-color: rgba(0, 0, 0, .85);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+}
+
+.site-header a {
+    color: #999;
+    transition: ease-in-out color .15s;
+}
+
+.site-header a:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+
+.carousel {
+    margin-bottom: 4rem;
+}
+
+/* Since positioning the image, we need to help out the caption */
+
+.carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+
+.carousel-item {
+    height: 32rem;
+    background-color: #777;
+}
+
+.carousel-item>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+}
+
+/* Featured Rooms */
+#featured-rooms {
+    padding:5px;
+}
+
+.add-margin {
+    margin: 5px;
+}
+.no-underline a {
+    text-decoration: none;
+}
+
+.no-underline p {
+    color: #000;
+}
+
+.no-underline:hover {
+    text-emphasis: #004085;
+}
+
+/* Our Services*/
+
+#services-div {
+    background-color: rgba(247,241,235,0.76);
+    padding:5px;
+}
+
+#services {
+    background-color: white;
+    margin-bottom: 5px;
+    padding:5px;
+}
+
+#services ul.nav.nav-tabs {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+#services > ul.nav.nav-tabs > li {
+    float: none;
+    display: table-cell;
+}
+#services ul.nav.nav-tabs > li > a {
+    text-align: center;
+}
+
+/*
+ * Footer
+ */
+footer {
+    background-color: rgba(31,34,59,0.93);
+    color: white;
+    padding:10px;
+	margin-top:300px;
+}
+
+/*
+    Main for every page
+ */
+#main {
+    padding:5px;
+    background-color: rgba(247,241,235,0.76);;
+}
+.page-header {
+    background: none;
+    text-align: center;
+}
+/*
+   * Extra utilities
+   */
+
+.align-center {
+    text-align:center;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.background-white {
+    background-color: white;
+    padding: 5px;
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.flex-equal>* {
+    -ms-flex: 1;
+    -webkit-box-flex: 1;
+    flex: 1;
+}
+
+@media (min-width: 768px) {
+    .flex-md-equal>* {
+        -ms-flex: 1;
+        -webkit-box-flex: 1;
+        flex: 1;
+    }
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+/*Custom CSS Added ....................*/
+.nav-item:hover{
+	background-color:#00b6ff;
+}
