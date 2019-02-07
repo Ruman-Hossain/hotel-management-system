@@ -141,6 +141,21 @@ if(!$_SESSION['id']){
           </ul>
         </li>
 		
+
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseHistory" data-parent="#exampleAccordion">
+            <i class="fa fa-history"></i>
+            <span class="nav-link-text">History</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseHistory">
+            <li>
+              <a href="room_booking_history.php">Room Booking History</a>
+            </li>
+            <li>
+              <a href="event_booking_history.php">Event Booking History</a>
+            </li>
+          </ul>
+        </li>
 		
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">

@@ -3,7 +3,94 @@
 	
 	
 	final class operations{
-
+		public static function insert_room_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price){
+			Global $pdo;
+			$sql="INSERT INTO room_booking_history(room_no,fdate,tdate,name,phone,code,address,price) VALUES(:room_no,:fdate,:tdate,:name,:phone,:code,:address,:price)";
+			$stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			$stmt->bindParam(':fdate',$fdate,PDO::PARAM_STR);
+			$stmt->bindParam(':tdate',$tdate,PDO::PARAM_STR);
+			$stmt->bindParam(':name',$name,PDO::PARAM_STR);
+			$stmt->bindParam(':phone',$phone,PDO::PARAM_STR);
+			$stmt->bindParam(':code',$code,PDO::PARAM_STR);
+			$stmt->bindParam(':address',$address,PDO::PARAM_STR);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+		    $stmt->execute();
+		}
+		public static function show_room_booking_history(){
+			Global $pdo;
+			$qry="SELECT *from room_booking_history";
+			$stmt = $pdo->prepare($qry);
+			$stmt->execute();
+			while($obj = $stmt->fetchObject()){
+				$room_no = $obj->room_no;
+				$fdate = $obj->fdate;
+				$tdate = $obj->tdate;
+				$name = $obj->name;
+				$phone=$obj->phone;
+				$code = $obj->code;
+				$address = $obj->address;
+				$price = $obj->price;
+										
+							echo"
+										
+							<tr>
+	                            <td>$room_no</td>
+	                            <td>$fdate</td>
+	                            <td>$tdate</td>
+	                            <td>$name</td>
+	                            <td>$phone</td>
+	                            <td>$code</td>
+	                            <td>$address</td>
+								<td>$price</td>
+							</tr>
+							";
+			}
+		}
+		public static function insert_event_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price){
+			Global $pdo;
+			$sql="INSERT INTO event_booking_history(room_no,fdate,tdate,name,phone,code,address,price) VALUES(:room_no,:fdate,:tdate,:name,:phone,:code,:address,:price)";
+			$stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			$stmt->bindParam(':fdate',$fdate,PDO::PARAM_STR);
+			$stmt->bindParam(':tdate',$tdate,PDO::PARAM_STR);
+			$stmt->bindParam(':name',$name,PDO::PARAM_STR);
+			$stmt->bindParam(':phone',$phone,PDO::PARAM_STR);
+			$stmt->bindParam(':code',$code,PDO::PARAM_STR);
+			$stmt->bindParam(':address',$address,PDO::PARAM_STR);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+		    $stmt->execute();
+		}
+		public static function show_event_booking_history(){
+			Global $pdo;
+			$qry="SELECT *from event_booking_history";
+			$stmt = $pdo->prepare($qry);
+			$stmt->execute();
+			while($obj = $stmt->fetchObject()){
+				$room_no = $obj->room_no;
+				$fdate = $obj->fdate;
+				$tdate = $obj->tdate;
+				$name = $obj->name;
+				$phone=$obj->phone;
+				$code = $obj->code;
+				$address = $obj->address;
+				$price = $obj->price;
+										
+							echo"
+										
+							<tr>
+	                            <td>$room_no</td>
+	                            <td>$fdate</td>
+	                            <td>$tdate</td>
+	                            <td>$name</td>
+	                            <td>$phone</td>
+	                            <td>$code</td>
+	                            <td>$address</td>
+								<td>$price</td>
+							</tr>
+							";
+			}
+		}
 		public static function room_already_exist_checking($room_no,$description,$price,$img_loc,$booking,$room_type){
 			Global $pdo;
 			$sql="SELECT * from rooms WHERE rooms.room_no=$room_no";
@@ -398,6 +485,18 @@
 					$stmt->execute();
 
 					echo "Event Updated Successfully.";
+				}
+
+				public static function update_expense_details($id,$date, $amount, $details){
+					Global $pdo;
+					$sql="UPDATE  expense_details SET id=:id,date=:date,amount=:amount,details=:details";
+									
+					$stmt = $pdo->prepare($sql);
+					$stmt->bindParam(':id',$id,PDO::PARAM_INT);
+					$stmt->bindParam(':date',$date,PDO::PARAM_STR);
+					$stmt->bindParam(':amount',$amount,PDO::PARAM_INT);
+					$stmt->bindParam(':details',$details,PDO::PARAM_STR);
+					$stmt->execute();
 				}
 				public static function update_admin_name($id,$olduser,$name,$confirmuser){
 							
@@ -799,11 +898,12 @@
 						Global $pdo;
 						Global $pending_booking_statuso;
 						operations::date_compare_booking_update();
-						$qry="SELECT booking.room_no,booking.fdate,booking.tdate,booking.name,booking.phone,booking.code,booking.address,rooms.booking,rooms.assigned_to from booking left join rooms ON booking.room_no=rooms.room_no";
+						$qry="SELECT rooms.price, booking.room_no,booking.fdate,booking.tdate,booking.name,booking.phone,booking.code,booking.address,rooms.booking,rooms.assigned_to from booking left join rooms ON booking.room_no=rooms.room_no";
 						//$qry = "SELECT * FROM booking ";
 						$stmt = $pdo->prepare($qry);
 						$stmt->execute();
 						while($obj = $stmt->fetchObject()){
+							$price=$obj->price;
 							$fdate = $obj->fdate;
 							$tdate = $obj->tdate;
 							$name = $obj->name;
@@ -813,8 +913,8 @@
 							$room_no = $obj->room_no;
 							$booking = $obj->booking;
 							$assigned_to=$obj->assigned_to;
-										
-							echo"
+
+							echo "
 										
 							<tr>
 	                            <td>$room_no</td>
@@ -851,11 +951,12 @@
 							echo'cancelled';
 							operations::cancel_booking_status($room_no);
 							operations::delete_from_booking_status($room_no);
-							header("Location:/royal_hotel/admin/booking.php");
+							header("Location:/hotel/admin/booking.php");
 						}
 						else if($_POST['todo']=='success'){
 							echo 'Success';
 							operations::update_booking_status($room_no);
+							operations::insert_room_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price);
 						}
 						else{
 							echo 'Nothing Selected Try Again';
@@ -935,10 +1036,11 @@
 					public static function show_event_booking(){
 						
 									Global $pdo;
-									$qry="SELECT event_booking.room_no,event_booking.fdate,event_booking.tdate,event_booking.name,event_booking.phone,event_booking.code,event_booking.address,events.booking from event_booking left join events ON event_booking.room_no=events.room_no";
+									$qry="SELECT events.price,event_booking.room_no,event_booking.fdate,event_booking.tdate,event_booking.name,event_booking.phone,event_booking.code,event_booking.address,events.booking from event_booking left join events ON event_booking.room_no=events.room_no";
 									$stmt = $pdo->prepare($qry);
 									$stmt->execute();
 									while($obj = $stmt->fetchObject()){
+									$price=$obj->price;
 									$fdate = $obj->fdate;
 									$tdate = $obj->tdate;
 									$name = $obj->name;
@@ -989,6 +1091,7 @@
 										else if($_POST['todo']=='success'){
 											echo 'Success';
 											operations::update_event_booking_status($room_no);
+											operations::insert_event_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price);
 										}
 										else{
 											echo 'Nothing Selected Try Again';
@@ -1212,6 +1315,67 @@
 	  
 		
 		
+		}
+		public static function room_earning(){
+			Global $pdo;
+			$sql="SELECT SUM(price) AS value_sum FROM room_booking_history";
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute();
+			
+			$obj=$stmt->fetchObject();
+			$total=$obj->value_sum;
+
+			if($total){
+				echo"<h1>$total</h1>";
+			}else{
+				echo "<h1>0</h1>";
+			}
+			
+		}
+		public static function event_earning(){
+			Global $pdo;
+			$sql="SELECT SUM(price) AS value_sum FROM event_booking_history";
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute();
+			
+			$obj=$stmt->fetchObject();
+			$total=$obj->value_sum;
+			if($total){
+				echo"<h1>$total</h1>";
+			}else{
+				echo "<h1>0</h1>";
+			}
+		}
+		public static function last_month_rooms_earning(){
+			Global $pdo;
+			$sql="SELECT SUM(price) AS value_sum FROM room_booking_history where (CURDATE() - room_booking_history.fdate)>30";
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute();
+			
+			$obj=$stmt->fetchObject();
+			$total=$obj->value_sum;
+			if($total){
+				echo"<h1>$total</h1>";
+			}else{
+				echo "<h1>0</h1>";
+			}
+		}
+		public static function total_earning(){
+
+		}
+		public static function total_expense(){
+			Global $pdo;
+			$sql="SELECT SUM(amount) AS value_sum FROM expense_details";
+			$stmt = $pdo->prepare($sql);
+			$stmt->execute();
+			
+			$obj=$stmt->fetchObject();
+			$total=$obj->value_sum;
+			if($total){
+				echo"<h1>$total</h1>";
+			}else{
+				echo "<h1>0</h1>";
+			}
 		}
 	
 	

@@ -1,5 +1,7 @@
 <?php
+   error_reporting(0);
 	include("ainclude/header.php");
+  include("../Model/class_operations_data.php");
 ?>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <div class="content-wrapper">
@@ -22,7 +24,7 @@
               <div class="mr-5">Total Expense</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left"><h1>15</h1></span>
+              <span class="float-left"><h1><?php operations::total_expense(); ?></h1></span>
               <span class="float-right">
                 <!--<i class="fa fa-angle-right"></i> -->
               </span>
@@ -36,10 +38,10 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-list"></i>
               </div>
-              <div class="mr-5">Total Available Rooms</div>
+              <div class="mr-5">Total Rooms Earning</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left"><h1>10</h1></span>
+              <span class="float-left"><?php operations::room_earning(); ?></span>
               <span class="float-right">
                 <!--<i class="fa fa-angle-right"></i> -->
               </span>
@@ -52,10 +54,10 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-shopping-cart"></i>
               </div>
-              <div class="mr-5">Total Booked Rooms</div>
+              <div class="mr-5">Total Event Earning</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left"><h1>25</h1></span>
+              <span class="float-left"><h1><?php operations::event_earning(); ?></h1></span>
               <span class="float-right">
                 <!--<i class="fa fa-angle-right"></i> -->
               </span>
@@ -68,10 +70,10 @@
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-support"></i>
               </div>
-              <div class="mr-5">Pending For Approval</div>
+              <div class="mr-5">Last Month Earning</div>
             </div>
             <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left"><h1>25</h1></span>
+              <span class="float-left"><h1><?php operations::last_month_rooms_earning(); ?></h1></span>
               <span class="float-right">
                 <!--<i class="fa fa-angle-right"></i> -->
               </span>
