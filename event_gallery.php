@@ -36,7 +36,7 @@
 	 
 	 
 	 try{
-		operations::show_image_from_event();
+		operations::show_events_images();
 	 }
 	 catch(Exception $e) {
 	  echo 'Message: ' .$e->getMessage();

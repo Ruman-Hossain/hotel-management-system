@@ -1086,7 +1086,7 @@
 											echo'cancelled';
 											operations::cancel_event_booking_status($room_no);
 											operations::delete_from_event_booking_status($room_no);
-											header("Location:/royal_hotel/admin/event_booking.php");
+											header("Location:/hotel/admin/event_booking.php");
 										}
 										else if($_POST['todo']=='success'){
 											echo 'Success';

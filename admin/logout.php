@@ -10,7 +10,7 @@ session_start();
 	 session_destroy(); 
 
 	
-	 header('Location:/royal_hotel/admin/index.php');
+	 header('Location:/hotel/admin/index.php');
 	
 
 ?>

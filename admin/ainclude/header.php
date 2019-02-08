@@ -7,7 +7,7 @@ session_start();
 <?php
 if(!$_SESSION['id']){
 	
-	header("Location:/hotel_royal/admin/login.php");
+	header("Location:/hotel/admin/login.php");
 }
 ?>
 

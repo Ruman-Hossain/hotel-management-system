@@ -36,7 +36,7 @@
 	 
 	 
 	 try{
-		operations::show_image_from_rooms();
+		operations::show_rooms_images();
 	 }
 	 catch(Exception $e) {
 	  echo 'Message: ' .$e->getMessage();
