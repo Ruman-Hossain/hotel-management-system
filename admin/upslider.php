@@ -8,7 +8,7 @@
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Add A Service</div>
+      <div class="card-header">Update Slider Information</div>
       <div class="card-body">
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype = "multipart/form-data">
           <div class="form-group">
@@ -41,7 +41,7 @@
 
 		  
 
-          <input type ="submit" name="submit" value="Add" class="btn btn-primary btn-block">
+          <input type ="submit" name="submit" value="Update" class="btn btn-primary btn-block">
         </form>
 
       </div>

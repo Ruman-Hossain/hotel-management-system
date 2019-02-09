@@ -14,16 +14,13 @@
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
-<!--			
               <div class="col-md-6">
                 <label >Room No</label>
                 <input class="form-control" name="room_no" type="text" aria-describedby="nameHelp" placeholder="Enter room no" required>
               </div>
--->			  
-			  
               <div class="col-md-6">
-                <label >Room_type</label>
-                <input class="form-control" name="room_type" type="text" aria-describedby="nameHelp" placeholder="Enter room_type" required >
+                <label >Room type</label>
+                <input class="form-control" name="room_type" type="text" aria-describedby="nameHelp" placeholder="Enter room type" required >
               </div>
             </div>
           </div>
@@ -33,8 +30,6 @@
                 <label >Price</label>
                 <input class="form-control" name="price" type="text" placeholder="Price" required >
               </div>
-			  
-<!--			  
               <div class="col-md-6">
                 <label >Booking</label>
                 <select class="form-control" name="booking" type="text" placeholder="Booking" required   >
@@ -42,8 +37,6 @@
 				<option value="no">no</option>
 				</select>
               </div>
-			  
--->			  
             </div>
           </div>
 
@@ -84,11 +77,11 @@
 			
 				if(isset($_POST['submit'])){
 				
-				if($_POST['description']== null || $_POST['price']== null || $_FILES['roomimage']== null ||$_POST['room_type']== null){
+				if($_POST['room_no']== null || $_POST['description']== null || $_POST['price']== null || $_FILES['roomimage']== null || $_POST['booking']== null || $_POST['room_type']== null){
 					echo "";
 				}
 				else{
-					$loc = "images/featured_rooms/";
+					$loc = "images/rooms/";
 						$filename = $_FILES['roomimage']['name'];
 						$tmpname = $_FILES['roomimage']['tmp_name'];
 						$filesize = $_FILES['roomimage']['size'];
@@ -108,8 +101,8 @@
 									
 									}
 						//$filepath = check_input::test_img("roomimage",$loc);			
-				    operations::insert_featured_rooms_table($_POST['description'],$_POST['price'],$filepath,$_POST['room_type']);
-				echo "successfully added";
+				    operations::featured_room_already_exist_checking($_POST['room_no'],$_POST['description'],$_POST['price'],$filepath,$_POST['booking'],$_POST['room_type']);
+				
 				
 				
 			}

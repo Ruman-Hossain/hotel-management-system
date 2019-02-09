@@ -9,18 +9,18 @@
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Add An Event</div>
+      <div class="card-header">Update Featured Room Information</div>
       <div class="card-body">
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
-                <label >Event No</label>
-                <input class="form-control" name="room_no" type="text" aria-describedby="nameHelp" placeholder="Enter event no" required>
+                <label >Room No</label>
+                <input class="form-control" name="room_no" type="text" aria-describedby="nameHelp" placeholder="Enter room no" required>
               </div>
               <div class="col-md-6">
-                <label >Event Type</label>
-                <input class="form-control" name="room_type" type="text" aria-describedby="nameHelp" placeholder="Enter event type" required >
+                <label >Room type</label>
+                <input class="form-control" name="room_type" type="text" aria-describedby="nameHelp" placeholder="Enter room_type" required >
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
           </div>
 		  
 
-          <input type ="submit" name="submit" value="Add" class="btn btn-primary btn-block">
+          <input type ="submit" name="submit" value="Update" class="btn btn-primary btn-block">
         </form>
 
       </div>
@@ -101,7 +101,7 @@
 									
 									}
 						//$filepath = check_input::test_img("roomimage",$loc);			
-				    operations::event_already_exist_checking($_POST['room_no'],$_POST['description'],$_POST['price'],$filepath,$_POST['booking'],$_POST['room_type']);
+				    operations::exists_to_update_featured_room_checking($_POST['room_no'],$_POST['description'],$_POST['price'],$filepath,$_POST['booking'],$_POST['room_type']);
 				
 				
 				

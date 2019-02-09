@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2019 at 09:42 PM
+-- Generation Time: Feb 09, 2019 at 01:18 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -57,7 +57,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `name`, `password`) VALUES
-(1, 'ruman', 'ruman');
+(1, 'ruman', 'b9d245bf34338b07abd14df558d1f60e');
 
 -- --------------------------------------------------------
 
@@ -77,13 +77,6 @@ CREATE TABLE `booking` (
   `room_no` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `booking`
---
-
-INSERT INTO `booking` (`id`, `fdate`, `tdate`, `name`, `mail`, `phone`, `code`, `address`, `room_no`) VALUES
-(10, '2019-02-07', '2019-02-15', 'Md Ruman Hossain', 'ruman.cse.brur@gmail.com', '1723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1120');
-
 -- --------------------------------------------------------
 
 --
@@ -94,16 +87,6 @@ CREATE TABLE `employee_title` (
   `emp_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `employee_title`
---
-
-INSERT INTO `employee_title` (`emp_id`, `title`) VALUES
-(1, 'Ruman'),
-(2, 'Anwar'),
-(3, 'Hotel Royal Manager'),
-(4, 'pitom');
 
 -- --------------------------------------------------------
 
@@ -126,8 +109,9 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`id`, `room_no`, `description`, `price`, `img_loc`, `booking`, `room_type`) VALUES
-(3, '123', 'checking2', '1478', 'images/rooms/img_forest.jpg', 'No', 'Single'),
-(4, '456', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1478', 'images/rooms/img_mountains.jpg', 'no', 'Single');
+(1, '11011', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '12000', 'images/rooms/11.jpg', 'No', 'Marriage C'),
+(2, '11001', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '12500', 'images/rooms/22.jpg', 'No', 'Boot Camp'),
+(3, '11010', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '12500', 'images/rooms/33.jpg', 'no', 'Cultural P');
 
 -- --------------------------------------------------------
 
@@ -165,6 +149,14 @@ CREATE TABLE `event_booking_history` (
   `price` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `event_booking_history`
+--
+
+INSERT INTO `event_booking_history` (`id`, `room_no`, `fdate`, `tdate`, `name`, `phone`, `code`, `address`, `price`) VALUES
+(1, '11011', '2019-02-13', '2019-02-15', 'Md Ruman Hossain', '01723974489', 'qwerty', '17/M, Rangpur Medical Campus', '12000'),
+(2, '11001', '2019-02-07', '2019-02-21', 'Md Ruman Hossain', '01723974489', 'qwerty', 'Home#273, Road#10 - Burirhat Road, Dhap Medical Pu', '12500');
+
 -- --------------------------------------------------------
 
 --
@@ -179,17 +171,23 @@ CREATE TABLE `expense_details` (
   `details` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `expense_details`
+-- Table structure for table `featured_booking`
 --
 
-INSERT INTO `expense_details` (`id`, `emp_id`, `date`, `amount`, `details`) VALUES
-(2, 1, '2018-11-29 23:03:42', 500, 'checking'),
-(3, 3, '2018-11-29 23:04:21', 58000, 'Hotel Royal Manager'),
-(4, 2, '2018-11-29 23:06:02', 8562, '789'),
-(5, 1, '2019-01-18 00:28:10', 20, 'testing Manager'),
-(6, 4, '2019-02-07 16:50:05', 20, 'Entering cost'),
-(7, 4, '2019-02-07 16:50:38', 18, 'Entering cost2');
+CREATE TABLE `featured_booking` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `fdate` varchar(50) NOT NULL,
+  `tdate` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `mail` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `room_no` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -199,9 +197,12 @@ INSERT INTO `expense_details` (`id`, `emp_id`, `date`, `amount`, `details`) VALU
 
 CREATE TABLE `featured_rooms` (
   `id` int(10) UNSIGNED NOT NULL,
+  `room_no` varchar(30) NOT NULL,
   `description` varchar(500) NOT NULL,
-  `price` varchar(50) NOT NULL,
+  `price` varchar(50) DEFAULT NULL,
   `img_loc` varchar(50) NOT NULL,
+  `booking` varchar(15) DEFAULT 'No',
+  `assigned_to` varchar(50) NOT NULL,
   `room_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -209,14 +210,37 @@ CREATE TABLE `featured_rooms` (
 -- Dumping data for table `featured_rooms`
 --
 
-INSERT INTO `featured_rooms` (`id`, `description`, `price`, `img_loc`, `room_type`) VALUES
-(1, 'Double Room', '1500', 'images/featured_rooms/4.jpg', 'Double'),
-(2, 'Single Rooms', '1000', 'images/featured_rooms/8.jpg', 'Single'),
-(3, 'Vip Featured Room', '2000', 'images/featured_rooms/2.jpg', 'VIP'),
-(4, 'dddddddddd', '2500', 'images/featured_rooms/6.jpg', 'sss'),
-(5, 'dilux room featured', '3000', 'images/featured_rooms/feature_1.jpg', 'Dilux'),
-(6, 'super Dilux', '3500', 'images/featured_rooms/feature_2.jpg', 'Super Dilu'),
-(7, 'super Dilux', '3500', 'images/featured_rooms/feature_2.jpg', 'Super Dilu');
+INSERT INTO `featured_rooms` (`id`, `room_no`, `description`, `price`, `img_loc`, `booking`, `assigned_to`, `room_type`) VALUES
+(1, '101', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1250', 'images/rooms/feature_1.jpg', 'No', '', 'Single'),
+(2, '103', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1750', 'images/rooms/feature_3.jpg', 'No', '', 'Double'),
+(4, '201', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1500', 'images/rooms/feature_4.jpg', 'No', '', 'Single');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `featured_room_booking_history`
+--
+
+CREATE TABLE `featured_room_booking_history` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `room_no` varchar(50) NOT NULL,
+  `fdate` varchar(50) NOT NULL,
+  `tdate` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `phone` varchar(50) NOT NULL,
+  `code` varchar(50) NOT NULL,
+  `address` varchar(50) DEFAULT NULL,
+  `price` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `featured_room_booking_history`
+--
+
+INSERT INTO `featured_room_booking_history` (`id`, `room_no`, `fdate`, `tdate`, `name`, `phone`, `code`, `address`, `price`) VALUES
+(1, '101', '2019-02-11', '2019-02-20', 'Md Ruman Hossain', '01723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1250'),
+(2, '103', '2019-02-14', '2019-02-20', 'Ruman Hossain', '01723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1750'),
+(3, '201', '2019-02-21', '2019-02-18', 'Md Ruman Hossain', '01723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1500');
 
 -- --------------------------------------------------------
 
@@ -240,8 +264,10 @@ CREATE TABLE `rooms` (
 --
 
 INSERT INTO `rooms` (`id`, `room_no`, `description`, `price`, `img_loc`, `booking`, `assigned_to`, `room_type`) VALUES
-(2, '1233', 'short', '14520', 'images/rooms/img_snowtops.jpg', 'No', '', 'doublee'),
-(4, '1120', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1478', 'images/rooms/img_snowtops.jpg', 'Success', '', 'Single');
+(1, '101', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1000', 'images/rooms/3.jpeg', 'no', '', 'Single'),
+(2, '102', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1500', 'images/rooms/3.jpeg', 'no', '', 'Double'),
+(3, '201', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1000', 'images/rooms/8.jpg', 'no', '', 'Single'),
+(4, '301', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', '1550', 'images/rooms/5.jpg', 'no', '', 'doublee');
 
 -- --------------------------------------------------------
 
@@ -266,8 +292,7 @@ CREATE TABLE `room_booking_history` (
 --
 
 INSERT INTO `room_booking_history` (`id`, `room_no`, `fdate`, `tdate`, `name`, `phone`, `code`, `address`, `price`) VALUES
-(1, '1233', '2019-02-09', '2019-02-12', 'Md Ruman Hossain', '1723974489', 'qwerty', 'Rangpur Medical Booking', '14520'),
-(2, '1120', '2019-02-07', '2019-02-15', 'Md Ruman Hossain', '1723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1478');
+(1, '101', '2019-02-14', '2019-02-20', 'Md Ruman Hossain', '01723974489', 'qwerty', '17/M, Rangpur Medical Campus', '1000');
 
 -- --------------------------------------------------------
 
@@ -287,9 +312,9 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `title`, `description`, `img_loc`) VALUES
-(1, 'GYM', 'Article Posted Under: Articles and Blog Posts Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Save If youâ€™re a gym-goer, or a self proclaimed gym rat, you will almost certainly have noticed that, this January, and indeed many Januaries past, had an influx of new faces and members in your local gym.  Often referred to as New Years Resolutioners, these new members often join the gy', 'images/service/gym1.png'),
-(2, 'Fitness Care', 'Articles and Blog Posts Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Save If youâ€™re a gym-goer, or a self proclaimed gym rat, you will almost certainly have noticed that, this January, and indeed many Januaries past, had an influx of new faces and members in your local gym.  Often referred to as New Years Resolutioners, these new members often join the gym in a bid to undo all', 'images/service/gym3.png'),
-(3, 'Test', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', 'images/service/gym2.png');
+(4, 'Entertainment', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', 'images/service/33.jpg'),
+(7, 'Food Corner', 'Article Posted Under: Articles and Blog Posts Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Top 7 Gym Tips that You Probably Donâ€™t Follow But Shouldnâ€™t Be Missing Out On Save If youâ€™re a gym-goer, or a self proclaimed gym rat, you will almost certainly have noticed that, this January, and indeed many Januaries past, had an influx of new faces and members in your local gym.  Often referred to as New Years Resolutioners, these new members often join the gy', 'images/service/our-serivesc-bar.jpg'),
+(8, 'GYM', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu', 'images/service/gym3.png');
 
 -- --------------------------------------------------------
 
@@ -309,8 +334,7 @@ CREATE TABLE `slider` (
 --
 
 INSERT INTO `slider` (`id`, `img_loc_one`, `img_loc_two`, `img_loc_three`) VALUES
-(1, 'images/slide/feature_3.jpg', 'images/slide/feature_2.jpg', 'images/slide/2.jpg'),
-(2, 'images/slide/1.jpg', 'images/slide/2.jpg', 'images/slide/3.jpg');
+(1, 'images/slide/11.jpg', 'images/slide/55.jpg', 'images/slide/8.jpg');
 
 --
 -- Indexes for dumped tables
@@ -365,9 +389,21 @@ ALTER TABLE `expense_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `featured_booking`
+--
+ALTER TABLE `featured_booking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `featured_rooms`
 --
 ALTER TABLE `featured_rooms`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `featured_room_booking_history`
+--
+ALTER TABLE `featured_room_booking_history`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -414,43 +450,55 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee_title`
 --
 ALTER TABLE `employee_title`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `event_booking`
 --
 ALTER TABLE `event_booking`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event_booking_history`
 --
 ALTER TABLE `event_booking_history`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `expense_details`
 --
 ALTER TABLE `expense_details`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `featured_booking`
+--
+ALTER TABLE `featured_booking`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `featured_rooms`
 --
 ALTER TABLE `featured_rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `featured_room_booking_history`
+--
+ALTER TABLE `featured_room_booking_history`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -462,19 +510,19 @@ ALTER TABLE `rooms`
 -- AUTO_INCREMENT for table `room_booking_history`
 --
 ALTER TABLE `room_booking_history`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `services`
 --
 ALTER TABLE `services`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `slider`
 --
 ALTER TABLE `slider`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

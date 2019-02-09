@@ -47,6 +47,50 @@
 							";
 			}
 		}
+		public static function insert_featured_room_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price){
+			Global $pdo;
+			$sql="INSERT INTO featured_room_booking_history(room_no,fdate,tdate,name,phone,code,address,price) VALUES(:room_no,:fdate,:tdate,:name,:phone,:code,:address,:price)";
+			$stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			$stmt->bindParam(':fdate',$fdate,PDO::PARAM_STR);
+			$stmt->bindParam(':tdate',$tdate,PDO::PARAM_STR);
+			$stmt->bindParam(':name',$name,PDO::PARAM_STR);
+			$stmt->bindParam(':phone',$phone,PDO::PARAM_STR);
+			$stmt->bindParam(':code',$code,PDO::PARAM_STR);
+			$stmt->bindParam(':address',$address,PDO::PARAM_STR);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+		    $stmt->execute();
+		}
+		public static function show_featured_room_booking_history(){
+			Global $pdo;
+			$qry="SELECT *from featured_room_booking_history";
+			$stmt = $pdo->prepare($qry);
+			$stmt->execute();
+			while($obj = $stmt->fetchObject()){
+				$room_no = $obj->room_no;
+				$fdate = $obj->fdate;
+				$tdate = $obj->tdate;
+				$name = $obj->name;
+				$phone=$obj->phone;
+				$code = $obj->code;
+				$address = $obj->address;
+				$price = $obj->price;
+										
+							echo"
+										
+							<tr>
+	                            <td>$room_no</td>
+	                            <td>$fdate</td>
+	                            <td>$tdate</td>
+	                            <td>$name</td>
+	                            <td>$phone</td>
+	                            <td>$code</td>
+	                            <td>$address</td>
+								<td>$price</td>
+							</tr>
+							";
+			}
+		}
 		public static function insert_event_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price){
 			Global $pdo;
 			$sql="INSERT INTO event_booking_history(room_no,fdate,tdate,name,phone,code,address,price) VALUES(:room_no,:fdate,:tdate,:name,:phone,:code,:address,:price)";
@@ -136,6 +180,52 @@
 			
 		}
 
+
+		public static function featured_room_already_exist_checking($room_no,$description,$price,$img_loc,$booking,$room_type){
+			Global $pdo;
+			$sql="SELECT * from featured_rooms WHERE featured_rooms.room_no=$room_no";
+			$stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+			$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+			$stmt->bindParam(':booking',$booking,PDO::PARAM_STR);
+			$stmt->bindParam(':room_type',$room_type,PDO::PARAM_STR);
+		    $stmt->execute();
+
+		   $n=$stmt->rowCount();
+		   if(!$n){
+		   	operations::insert_featured_rooms_table($room_no,$description,$price,$img_loc,$booking,$room_type);
+		   }
+		   else{
+		   		echo"Room Already exists. Try inserting Another Room";
+		   }
+		}
+		
+		public static function insert_featured_rooms_table($room_no,$description,$price,$img_loc,$booking,$room_type){
+		
+		Global $pdo;
+	
+		$sql = "INSERT INTO featured_rooms(room_no,description,price,img_loc,booking,room_type)
+							VALUES(:room_no,:description,:price,:img_loc,:booking,:room_type)";
+									
+		    $stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+			$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+			$stmt->bindParam(':booking',$booking,PDO::PARAM_STR);
+			$stmt->bindParam(':room_type',$room_type,PDO::PARAM_STR);
+			
+			
+			$stmt->execute();
+
+									
+			echo "successfully added";
+
+			
+		}
+
 		public static function event_already_exist_checking($room_no,$description,$price,$img_loc,$booking,$room_type){
 			Global $pdo;
 			$sql="SELECT * from events WHERE events.room_no=$room_no";
@@ -179,7 +269,7 @@
 			
 		}
 		
-		public static function insert_featured_rooms_table($description,$price,$img_loc,$room_type){
+/*		public static function insert_featured_rooms_table($description,$price,$img_loc,$room_type){
 		
 		Global $pdo;
 		
@@ -198,7 +288,7 @@
 				
 			
 			
-		}
+		}*/
 		
 		
 		
@@ -279,6 +369,37 @@
 			
 			
 		}
+		public static function already_exists_services_table_checking($title,$description,$img_loc){
+			Global $pdo;
+			$sql="SELECT * from services WHERE services.title=$title";
+			$stmt = $pdo->prepare($sql);
+		    $stmt->bindParam(':title',$title,PDO::PARAM_STR);
+			$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+			$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+		    $stmt->execute();
+
+		   $n=$stmt->rowCount();
+		   if($n){
+		   	operations::update_services_table($title,$description,$img_loc);
+		   }
+		   else{
+		   		echo"Service Doesn't Exists to Update. Try Another.";
+		   }
+		}
+		public static function update_services_table($title,$description,$img_loc){
+		
+				Global $pdo;
+		
+				$sql = "UPDATE services SET title =: title, description =: description, img_loc =: img_loc";
+				$stmt = $pdo->prepare($sql);
+				$stmt->bindParam(':title',$title,PDO::PARAM_STR);
+				$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+				$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+				$stmt->execute();
+
+				echo 'Successfully Service Updated.';
+									
+		}
 		public static function insert_services_table($title,$description,$img_loc){
 		
 				Global $pdo;
@@ -349,7 +470,20 @@
 	public static function delete_rooms_table($room_no){
 		
 	   Global $pdo;
-	 	$sql = "DELETE FROM rooms WHERE room_no = :room_no";
+	 	$sql = "DELETE * FROM rooms WHERE room_no = :room_no";
+	  	$stmt = $pdo->prepare($sql);
+	  	$stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+	 	$stmt->execute();
+				
+		if($stmt->execute()){
+			echo "Successfully deleted";
+		}
+	  
+  }
+  public static function delete_featured_rooms_table($room_no){
+		
+	   Global $pdo;
+	 	$sql = "DELETE FROM featured_rooms WHERE room_no = :room_no";
 	  	$stmt = $pdo->prepare($sql);
 	  	$stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
 	 	$stmt->execute();
@@ -373,6 +507,18 @@
 				}
 	  
   }	
+  public static function delete_featured_rooms($price,$room_type){
+  		Global $pdo;
+			$sql = "DELETE FROM featured_rooms WHERE price =: price AND room_type = :room_type";
+			$stmt = $pdo->prepare($sql);
+			$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+			$stmt->bindParam(':room_type',$room_type,PDO::PARAM_STR);
+			$stmt->execute();
+				
+			if($stmt->execute()){
+				echo "Successfully deleted";
+			}
+  }
   
 						public static function delete_about_table($id){
 		
@@ -449,6 +595,43 @@
 					$stmt->execute();
 
 					echo "Room Updated Successfully.";
+				}
+
+
+				public static function exists_to_update_featured_room_checking($room_no,$description,$price,$img_loc,$booking,$room_type){
+					Global $pdo;
+					$sql="SELECT * from featured_rooms WHERE featured_rooms.room_no=$room_no";
+					$stmt = $pdo->prepare($sql);
+				    $stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+					$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+					$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+					$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+					$stmt->bindParam(':booking',$booking,PDO::PARAM_STR);
+					$stmt->bindParam(':room_type',$room_type,PDO::PARAM_STR);
+				    $stmt->execute();
+
+				   $n=$stmt->rowCount();
+				   if($n){
+				   	operations::update_featured_rooms_table($room_no,$description,$price,$img_loc,$booking,$room_type);
+				   }
+				   else{
+				   		echo"Room Doesn't exists to Update.Try Another";
+				   }
+				}
+				public static function update_featured_rooms_table($room_no,$description,$price,$img_loc,$booking,$room_type){
+					Global $pdo;
+					// $security = "?..H@Si./n/?"; 
+					$sql = "UPDATE featured_rooms SET description=:description, price=:price,img_loc=:img_loc,booking=:booking,room_type=:room_type WHERE room_no = :room_no";
+					$stmt = $pdo->prepare($sql);
+					$stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+					$stmt->bindParam(':description',$description,PDO::PARAM_STR);
+					$stmt->bindParam(':price',$price,PDO::PARAM_STR);
+					$stmt->bindParam(':img_loc',$img_loc,PDO::PARAM_STR);
+					$stmt->bindParam(':booking',$booking,PDO::PARAM_STR);
+					$stmt->bindParam(':room_type',$room_type,PDO::PARAM_STR);
+					$stmt->execute();
+
+					echo "Featured Room Updated Successfully.";
 				}
 
 				public static function exists_to_update_event_checking($room_no,$description,$price,$img_loc,$booking,$room_type){
@@ -582,11 +765,13 @@
 	public static function show_featured_rooms(){
 		
 		Global $pdo;
-	  $qry = "SELECT * FROM featured_rooms";
+		operations::date_compare_booking_update();
+	  $qry = "SELECT * FROM featured_rooms  WHERE booking IN('No','Pending','no','pending')";
 	  			$stmt = $pdo->prepare($qry);
 				$stmt->execute();
 				while($obj = $stmt->fetchObject()){
 				$id = $obj->id;	
+				$room_no = $obj->room_no;
 				$description = $obj->description;
 				$price = $obj->price;
 				$img_loc = $obj->img_loc;
@@ -600,9 +785,10 @@
                                     <div class='card'>
                                         <img class='card-img-top' src='$img_loc' alt='Card image cap'>
                                         <div class='card-body'>
-                                            <h5 class='card-title'>$room_type</h5>
-                                            <p class='card-text'>Tk:$price </p>
-                                           
+                                            <h6 class='card-title'>Room No - $room_no</h6>
+											<h6 class='card-title'>Room Type - $room_type</h6>
+                                            <p class='card-text'><b>Price : $price BDT</b></p>
+                                            <a class='btn btn-primary' href='featured_booking.php?id=$id'>Book Now</a>
                                         </div>
                                     </div>
                                 </a>
@@ -789,6 +975,16 @@
                 $stmt->execute();
 							
         }
+        public static function delete_from_services_table($title){
+						//echo $room_no;
+						Global $pdo;
+						$sql="delete from services where title=:title";
+						$rslt=$pdo->prepare($sql);
+						$rslt->bindParam(':title',$title,PDO::PARAM_STR);
+						$rslt->execute();
+
+						echo 'Successfuly Service Deleted.';
+					}
 						
         public static function get_id($id){
             Global $pdo;
@@ -856,14 +1052,14 @@
 					}
 					public static function cancel_booking_status($room_no){
 						Global $pdo;
-						$sql="update rooms set booking='No' where room_no=:room_no";
+						$sql="UPDATE rooms SET booking='No' WHERE room_no=:room_no";
 						$rslt=$pdo->prepare($sql);
 						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
 						$rslt->execute();
 					}
 					public static function pending_booking_status($room_no){
 						Global $pdo;
-						$sql="update rooms set booking='Pending' where room_no=:room_no";
+						$sql="UPDATE rooms SET booking='Pending' WHERE room_no=:room_no";
 						$rslt=$pdo->prepare($sql);
 						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
 						$rslt->execute();
@@ -871,11 +1067,12 @@
 					public static function delete_from_booking_status($room_no){
 						//echo $room_no;
 						Global $pdo;
-						$sql="delete from booking where room_no=:room_no";
+						$sql="DELETE from booking WHERE room_no=:room_no";
 						$rslt=$pdo->prepare($sql);
 						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
 						$rslt->execute();
 					}
+
 					public static function getid($number){
 						return $number;
 					}
@@ -957,6 +1154,146 @@
 							echo 'Success';
 							operations::update_booking_status($room_no);
 							operations::insert_room_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price);
+						}
+						else{
+							echo 'Nothing Selected Try Again';
+						}
+										
+					}
+				}
+				public static function insert_featured_book_table($fdate,$tdate,$name,$mail,$phone,$code,$address,$room_no){
+						
+						Global $pdo;
+		
+							$sql = "INSERT INTO featured_booking(fdate,tdate,name,mail,phone,code,address,room_no)
+							VALUES(:fdate,:tdate,:name,:mail,:phone,:code,:address,:room_no)";
+									
+							$stmt = $pdo->prepare($sql);
+							$stmt->bindParam(':fdate',$fdate,PDO::PARAM_STR);
+							$stmt->bindParam(':tdate',$tdate,PDO::PARAM_STR);
+							$stmt->bindParam(':name',$name,PDO::PARAM_STR);
+							$stmt->bindParam(':mail',$mail,PDO::PARAM_STR);
+							$stmt->bindParam(':phone',$phone,PDO::PARAM_STR);
+							$stmt->bindParam(':code',$code,PDO::PARAM_STR);
+							$stmt->bindParam(':address',$address,PDO::PARAM_STR);
+							$stmt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+			
+			
+							$stmt->execute();
+							
+						
+						
+						
+						
+					}
+				public static function update_featured_booking_status($room_no){
+						Global $pdo;
+						$sql="UPDATE featured_rooms SET booking='Success' WHERE room_no=:room_no";
+						$rslt=$pdo->prepare($sql);
+						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+						$rslt->execute();
+					}
+					public static function cancel_featured_booking_status($room_no){
+						Global $pdo;
+						$sql="UPDATE featured_rooms SET booking='No' WHERE room_no=:room_no";
+						$rslt=$pdo->prepare($sql);
+						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+						$rslt->execute();
+					}
+					public static function pending_featured_booking_status($room_no){
+						Global $pdo;
+						$sql="UPDATE featured_rooms SET booking='Pending' WHERE room_no=:room_no";
+						$rslt=$pdo->prepare($sql);
+						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+						$rslt->execute();
+					}
+					public static function delete_from_featured_booking_status($room_no){
+						//echo $room_no;
+						Global $pdo;
+						$sql="DELETE  from featured_booking WHERE room_no=:room_no";
+						$rslt=$pdo->prepare($sql);
+						$rslt->bindParam(':room_no',$room_no,PDO::PARAM_STR);
+						$rslt->execute();
+					}
+
+					public static function date_compare_featured_booking_update(){
+						Global $pdo;
+
+						$sql="UPDATE featured_rooms,featured_booking SET featured_rooms.booking='No' where featured_booking.tdate < CURDATE() and featured_booking.room_no=featured_rooms.room_no"; //Update booking status
+						$st=$pdo->prepare($sql);
+						$st->execute();
+
+						$qry="SELECT featured_rooms.room_no from featured_rooms,featured_booking where featured_booking.tdate < CURDATE() and featured_booking.room_no=featured_rooms.room_no";//Catch the room_no
+						$stmt = $pdo->prepare($qry);
+						$stmt->execute();
+						while($obj = $stmt->fetchObject()){
+    						$room_no = $obj->room_no;
+							operations::delete_from_featured_booking_status($room_no);
+						}
+					}
+				public static function show_featured_booking(){
+						Global $pdo;
+						Global $pending_booking_statuso;
+						operations::date_compare_featured_booking_update();
+						$qry="SELECT featured_rooms.price, featured_booking.room_no,featured_booking.fdate,featured_booking.tdate,featured_booking.name,featured_booking.phone,featured_booking.code,featured_booking.address,featured_rooms.booking,featured_rooms.assigned_to from featured_booking left join featured_rooms ON featured_booking.room_no=featured_rooms.room_no";
+						//$qry = "SELECT * FROM booking ";
+						$stmt = $pdo->prepare($qry);
+						$stmt->execute();
+						while($obj = $stmt->fetchObject()){
+							$price=$obj->price;
+							$fdate = $obj->fdate;
+							$tdate = $obj->tdate;
+							$name = $obj->name;
+							$phone=$obj->phone;
+							$code = $obj->code;
+							$address = $obj->address;
+							$room_no = $obj->room_no;
+							$booking = $obj->booking;
+							$assigned_to=$obj->assigned_to;
+
+							echo "
+										
+							<tr>
+	                            <td>$room_no</td>
+	                            <td>$fdate</td>
+	                            <td>$tdate</td>
+	                            <td>$name</td>
+	                            <td>$phone</td>
+	                            <td>$code</td>
+	                            <td>$address</td>
+								<td>$booking</td>
+								<td>$assigned_to</td>
+	                            <td>
+									<form action='#' method='post'>
+										<select name='todo'>
+											<option value=''>----------</option>
+											<option value='pending'>Pending</option>
+											<option value='cancelled'>Cancelled</option>
+											<option value='success'>Success</option>
+										</select>
+										<span><input type='submit' name='submit' value='Submit' class='btn btn-primary'></span>
+									</form>
+	                            </td>
+							</tr>
+							";
+
+						}
+							   
+					if(isset($_POST['submit'])){
+						if($_POST['todo']=='pending'){
+							echo'pending';
+							operations::pending_featured_booking_status($room_no);
+						}
+						else if($_POST['todo']=='cancelled'){
+							echo'cancelled';
+							operations::cancel_featured_booking_status($room_no);
+							operations::delete_from_featured_booking_status($room_no);
+							header("Location:/hotel/admin/featured_booking.php");
+						}
+						else if($_POST['todo']=='success'){
+							echo 'Success';
+							operations::update_featured_booking_status($room_no);
+							operations::insert_featured_room_booking_history($room_no,$fdate,$tdate,$name,$phone,$code,$address,$price);
 						}
 						else{
 							echo 'Nothing Selected Try Again';

@@ -8,7 +8,7 @@
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
-      <div class="card-header">Update Your Slider</div>
+      <div class="card-header">Add Your Slider</div>
       <div class="card-body">
          <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype = "multipart/form-data">
           <div class="form-group">

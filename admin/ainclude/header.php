@@ -29,6 +29,7 @@ if(!$_SESSION['id']){
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -56,7 +57,10 @@ if(!$_SESSION['id']){
             <li>
               <a href="booking.php">Room Booking</a>
             </li>
-			<li>
+            <li>
+              <a href="featured_booking.php">Featured Room Booking</a>
+            </li>
+			       <li>
               <a href="event_booking.php">Event Booking</a>
             </li>
 		   </ul>
@@ -99,8 +103,14 @@ if(!$_SESSION['id']){
             <li>
                <a href="update_room.php">Update Room</a>
             </li>
+            <li>
+               <a href="update_featured_room.php">Update Featured Room</a>
+            </li>
           <li>
             <a href="update_event.php">Update Event</a>
+          </li>
+          <li>
+            <a href="update_services.php">Update Service</a>
           </li>
             <li>
               <a href="upslider.php">Update Slider</a>
@@ -117,9 +127,15 @@ if(!$_SESSION['id']){
             <li>
                <a href="delete_rooms.php">Delete Room</a>
             </li>
+            <li>
+               <a href="delete_featured_room.php">Delete Featured Room</a>
+            </li>
           <li>
             <a href="delete_events.php">Delete Event</a>
           </li>
+          <li>
+               <a href="delete_service.php">Delete Service</a>
+            </li>
            </ul>
         </li>
 
@@ -150,6 +166,9 @@ if(!$_SESSION['id']){
           <ul class="sidenav-second-level collapse" id="collapseHistory">
             <li>
               <a href="room_booking_history.php">Room Booking History</a>
+            </li>
+            <li>
+              <a href="featured_room_booking_history.php">Featured Room Booking History</a>
             </li>
             <li>
               <a href="event_booking_history.php">Event Booking History</a>
